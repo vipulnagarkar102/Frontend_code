@@ -8,7 +8,7 @@ const Offers = () => {
                 <div className='mt-36 [@media(min-width:1750px)]:mt-36'>
                         <div className=' mb-20 px-8 md:px-12 lg:px-24 xl:px-64 gap-6 flex flex-col items-center justify-center text-center'>
                                 <div>
-                                        <p className='mt-20 font-poppins font-semibold text-[40px] text-[#003F5C] md:text-[40px] [@media(min-width:1750px)]:text-[56px] md:text-center leading-[42px] md:leading-[55px] [@media(min-width:1750px)]:leading-[75px] tracking-[1%] text-center '>Building innovative solutions is at the core of everything we do.</p>
+                                        <p className='mt-20 font-poppins font-semibold text-[40px] text-[#003F5C] md:text-[34px] [@media(min-width:1750px)]:text-[56px] md:text-center leading-[42px] md:leading-[55px] [@media(min-width:1750px)]:leading-[75px] tracking-[1%] text-center '>Building innovative solutions is at the core of everything we do.</p>
                                 </div>
                                 <div>
                                         <p className='font-lato font-normal text-[20px] md:text-[22px] [@media(min-width:1750px)]:text-[28px] leading-[120%] [@media(min-width:1750px)]:leading-[140%] tracking-[0%] md:text-center text-center text-[#003F5C]'>At VtexAI, we are driven by resilience and a passion for innovation, leveraging cutting-edge technology to transform patient care. We challenge conventional thinking, unlocking new possibilities to improve health outcomes worldwide. Our mission is clear: The VtexAI Collective driving groundbreaking innovations for a healthier future.</p>
