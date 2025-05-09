@@ -7,7 +7,7 @@ import React from "react";
 
 const WatchFree = () => {
   return (
-    <div className="bg-[#E0F7FA] w-full xl:h-[600px] [@media(min-width:1750px)]:h-[480px] relative">
+    <div className="bg-[#E0F7FA] w-full xl:h-[500px] [@media(min-width:1750px)]:h-[480px] relative">
       {/* Flex container with sidebar and content */}
       <div className="flex flex-col xl:flex-row w-full h-full">
         {/* LEFT SIDEBAR */}
