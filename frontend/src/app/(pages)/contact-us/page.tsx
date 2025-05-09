@@ -126,7 +126,7 @@ const ContactUs = () => {
                         {/* Heading */}
                         <div>
                             <p className="font-poppins text-[20px] md:text-[22px] [@media(min-width:1750px)]:text-[28px] font-semibold">
-                                General <br className="hidden md:block"></br>Support
+                                General Support<br className="hidden md:block"></br>& Partnership
                             </p>
                         </div>
 
