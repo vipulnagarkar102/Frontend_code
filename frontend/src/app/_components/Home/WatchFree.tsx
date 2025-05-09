@@ -7,73 +7,83 @@ import React from "react";
 
 const WatchFree = () => {
   return (
-    <div className="relative [@media(min-width:1750px)]:mt-20">
-      {/* for small screen */}
-      <div className="bg-[#00A5CF] xl:hidden">
-        <p className="font-poppins text-[32px] text-center font-semibold text-white">
-          START FOR FREE
-        </p>
-      </div>
+    <div className="bg-[#E0F7FA] w-full xl:h-[600px] [@media(min-width:1750px)]:h-[480px] relative">
+      {/* Flex container with sidebar and content */}
+      <div className="flex flex-col xl:flex-row w-full h-full">
+        {/* LEFT SIDEBAR */}
+        <div className="hidden xl:flex items-center justify-center w-[100px] bg-[#00A5CF]">
+          <p className="transform -rotate-90 text-white font-poppins font-semibold text-[32px] whitespace-nowrap">
+            START FOR FREE
+          </p>
+        </div>
 
-      {/* for large screen */}
-      <p className="hidden absolute xl:block -ml-44  mt-[138px] [@media(min-width:1750px)]:mt-[180px] font-poppins text-[32px] text-center font-semibold text-white pt-12 pb-6 bg-[#00A5CF] transform -rotate-90 w-[400px] [@media(min-width:1750px)]:w-[480px]">
-        START FOR FREE
-      </p>
+        {/* FOR SMALL SCREENS */}
+        <div className="xl:hidden w-full bg-[#00A5CF] py-4 text-center">
+          <p className="text-white font-poppins font-semibold text-[28px]">
+            START FOR FREE
+          </p>
+        </div>
 
-      <div className="xl:h-[400px] [@media(min-width:1750px)]:h-[480px] bg-[#E0F7FA] max-w-screen flex flex-row">
-        <div className="md:pl-12 max-w-screen flex gap-6 [@media(min-width:1750px)]:gap-30 my-6 xl:my-0 flex-wrap mx-auto items-center justify-center text-[#003F5C]">
-          <div
-            className="flex flex-col justify-between gap-4 mx-4 px-6 py-12  rounded-[10px]  lg:w-[540px] lg:h-[334px] [@media(min-width:1750px)]:w-[600px] [@media(min-width:1750px)]:h-[400px] bg-cover bg-center cursor-pointer"
-            style={{ backgroundImage: "url('/Generative AI for DevOps.png')" }}
-          >
-            <p className="font-lato text-[22px] text-white bg-[#00A897] bg-opacity-80 px-4 py-2 rounded-md inline-block w-fit">
-              Predicting Fibrosis Stages in NAFLD <br /> Using Advanced AI
-              Models
-            </p>
-            {/* <p className="font-poppins text-[40px] text-white">HealthTech AI Plan</p> */}
-
-            <Link
-              href="https://iframe.dacast.com/vod/9900da50-f739-dfb2-d77e-a292aac8b47f/d28e41cb-3e2d-48c7-b6b2-1c02b7368324"
-              target="_blank"
-            >
-              <Button
-                variant="secondary"
-                className="bg-[#00A5CF] text-white hover:scale-105 duration-150 hover:bg-[#00A5CF] font-lato font-semibold text-[16px] [@media(min-width:1750px)]:text-[20px] cursor-pointer"
-                onClick={(e) => e.stopPropagation()} // Prevents parent click from firing
+        {/* MAIN CARD SECTION */}
+        <div className="flex-1 w-full px-4 md:px-8 py-6 flex flex-wrap justify-center gap-6">
+          {/* CARD 1 */}
+          <div className="w-full sm:w-[48%] lg:w-[45%] bg-white rounded-[10px] shadow-md overflow-hidden">
+            <div
+              className="w-full h-[280px] bg-cover bg-center"
+              style={{
+                backgroundImage: "url('/Fibrosis predictions.png')",
+              }}
+            />
+            <div className="p-6 flex flex-col gap-4">
+              <p className="font-lato text-[22px] text-[#1A1A1A]">
+                Predicting Fibrosis Stages in NAFLD Using Advanced AI
+                Models
+              </p>
+              <Link
+                href="https://iframe.dacast.com/vod/9900da50-f739-dfb2-d77e-a292aac8b47f/d28e41cb-3e2d-48c7-b6b2-1c02b7368324"
+                target="_blank"
               >
-                WATCH NOW
-                <span className="rotate-225 ml-2">
-                  <ArrowDown size={30} />
-                </span>
-              </Button>
-            </Link>
+                <Button
+                  variant="secondary"
+                  className="bg-[#00A5CF] text-white hover:scale-105 duration-150 hover:bg-[#00A5CF] font-lato font-semibold text-[16px] [@media(min-width:1750px)]:text-[20px]"
+                >
+                  WATCH NOW
+                  <span className="rotate-225 ml-2">
+                    <ArrowDown size={30} />
+                  </span>
+                </Button>
+              </Link>
+            </div>
           </div>
 
-          <div
-            className="flex flex-col justify-between gap-4 mx-4 px-6 py-12  rounded-[10px]  lg:w-[540px] lg:h-[334px] [@media(min-width:1750px)]:w-[600px] [@media(min-width:1750px)]:h-[400px] bg-cover bg-center cursor-pointer"
-            style={{ backgroundImage: "url('/Fibrosis predictions.png')" }}
-          >
-            <p className="font-lato text-[22px] text-white bg-[#00A897] bg-opacity-80 px-4 py-2 rounded-md inline-block w-fit">
-              Revolutionizing DevSecOps: AI and <br /> Generative AI in Action
-              Models
-            </p>
-            {/* <p className="font-poppins text-[40px] text-white">HealthTech AI Plan</p> */}
-
-            <Link
-              href="https://iframe.dacast.com/vod/9900da50-f739-dfb2-d77e-a292aac8b47f/22e74208-fa8c-44dc-b5d1-540ffbc68c5b"
-              target="_blank"
-            >
-              <Button
-                variant="secondary"
-                className="bg-[#00A5CF] text-white hover:scale-105 duration-150 hover:bg-[#00A5CF] font-lato font-semibold text-[16px] [@media(min-width:1750px)]:text-[20px] cursor-pointer"
-                onClick={(e) => e.stopPropagation()} // Prevents parent click from firing
+          {/* CARD 2 */}
+          <div className="w-full sm:w-[48%] lg:w-[45%] bg-white rounded-[10px] shadow-md overflow-hidden">
+            <div
+              className="w-full h-[280px] bg-cover bg-center"
+              style={{
+                backgroundImage: "url('/Generative AI for DevOps.png')",
+              }}
+            />
+            <div className="p-6 flex flex-col gap-4">
+              <p className="font-lato text-[22px] text-[#1A1A1A]">
+                Revolutionizing DevSecOps: AI and Generative AI in Action Models
+                Models
+              </p>
+              <Link
+                href="https://iframe.dacast.com/vod/9900da50-f739-dfb2-d77e-a292aac8b47f/22e74208-fa8c-44dc-b5d1-540ffbc68c5b4"
+                target="_blank"
               >
-                WATCH NOW
-                <span className="rotate-225 ml-2">
-                  <ArrowDown size={30} />
-                </span>
-              </Button>
-            </Link>
+                <Button
+                  variant="secondary"
+                  className="bg-[#00A5CF] text-white hover:scale-105 duration-150 hover:bg-[#00A5CF] font-lato font-semibold text-[16px] [@media(min-width:1750px)]:text-[20px]"
+                >
+                  WATCH NOW
+                  <span className="rotate-225 ml-2">
+                    <ArrowDown size={30} />
+                  </span>
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
