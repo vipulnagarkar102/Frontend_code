@@ -19,7 +19,7 @@ export default function TermsAndConditionsPage() {
         </div>
         
         {/* Cards Grid */}
-        <div className="mt-6 md:mt-10 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 place-items-center gap-8">
+        <div className="mt-6 md:mt-10 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 place-items-center gap-8">
           {termsData.map((item) => (
             <Link
               href={`/terms-and-conditions/${item.id}`}
