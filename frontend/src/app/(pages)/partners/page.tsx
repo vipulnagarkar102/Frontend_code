@@ -1,5 +1,7 @@
+'use client';
 import Image from 'next/image'
 import React from 'react'
+import { useRouter } from 'next/navigation';
 import UpsellImage from '@/assets/upsell4.png'
 import UpsellImage5 from '@/assets/upsell5.png'
 import { Button } from '@/components/ui/button'
@@ -86,6 +88,11 @@ const Partners = () => {
   ];
 
 
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push('/contact-us'); // <-- opens another page
+  };
 
 
   return (
@@ -180,7 +187,7 @@ const Partners = () => {
             ))}
           </div>
           <div className= 'text-center mt-10'>
-            <Button className=' font-lato py-4 font-semibold text-[16px] [@media(min-width:1750px)]:text-[24px] cursor-pointer bg-[#00A5CF] hover:bg-[#00A5CF] text-[#FFFFFF] leading-[100%] '>CONTACT US<span className='rotate-225'><ArrowDown size={30} /></span></Button>
+            <Button onClick={handleClick} className=' font-lato py-4 font-semibold text-[16px] [@media(min-width:1750px)]:text-[24px] cursor-pointer bg-[#00A5CF] hover:bg-[#00A5CF] text-[#FFFFFF] leading-[100%] '>CONTACT US<span className='rotate-225'><ArrowDown size={30} /></span></Button>
           </div>
         </div>
       </div>
