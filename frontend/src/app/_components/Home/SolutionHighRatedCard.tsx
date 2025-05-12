@@ -15,7 +15,7 @@ interface Video {
 const StarRating = ({ rating }: { rating: number }) => {
   const totalStars = 5;
   return (
-    <div className="flex gap-1 mt-2 self-start">
+    <div className="flex gap-1 mt-5 self-start">
       {[...Array(totalStars)].map((_, index) => {
         const fillColor = index + 1 <= rating ? "#008080" : "gray";
         return <Star key={index} size={20} fill={fillColor} color={fillColor} />;
@@ -50,7 +50,7 @@ const HighRatedCard = () => {
   if (loading) return <p>Loading top-rated videos...</p>;
 
   return (
-    <div className="flex flex-row justify-start gap-6 w-full px-4">
+    <div className="flex flex-row justify-start gap-6 w-full px-4 py-10">
       {videos.slice(0, 10).map((video) => (
         <div
           key={video._id}
