@@ -17,7 +17,7 @@ const Home = () => {
         <Image
           src={HeroImage}
           alt='Hero Image'
-          layout='fill' // Use layout='fill' to make the image cover the entire div
+          fill // Use layout='fill' to make the image cover the entire div
         // Important for responsiveness
         />
 
