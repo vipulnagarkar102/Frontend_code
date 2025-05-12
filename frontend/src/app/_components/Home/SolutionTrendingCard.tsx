@@ -69,7 +69,7 @@ const TrendingCard = () => {
           <p className="mt-4 text-left font-semibold line-clamp-2 text-sm w-full">
             {video.title}
           </p>
-          <p className="mt-2 font-lato font-normal md:font-semibold text-[16px] bg-[#00A897] rounded-2xl py-1 px-3 text-center w-fit text-white self-start">
+          <p className="mt-5 font-lato font-normal md:font-semibold text-[16px] bg-[#00A897] rounded-2xl py-1 px-3 text-center w-fit text-white self-start">
             Date:{" "}
             {new Date(video.valid_from).toLocaleDateString("en-GB", {
               day: "2-digit",
