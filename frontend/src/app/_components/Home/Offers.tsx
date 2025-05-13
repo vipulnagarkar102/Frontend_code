@@ -99,7 +99,7 @@ const Offers = () => {
 
                                         {/* Button */}
                                         <div>
-                                                <Link href='/'>
+                                                <Link href='/flexpick-plan'>
                                                         <Button variant='secondary' className='font-lato font-semibold text-[16px] cursor-pointer bg-[#FFFFFF] text-[#003F5C] leading-[100%]'>EXPLORE PLAN <span className='rotate-225'><ArrowDown size={30} /></span></Button>
                                                 </Link>
                                         </div>
