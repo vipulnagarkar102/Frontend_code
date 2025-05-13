@@ -39,7 +39,7 @@ const HighRatedCard = () => {
           console.error("Unexpected response format:", data);
         }
       } catch (err) {
-        console.error("Failed to fetch top-rated videos::", err);
+        console.error("Failed to fetch top-rated videos:", err);
       } finally {
         setLoading(false);
       }
