@@ -17,14 +17,14 @@ const Home = () => {
         <Image
           src={HeroImage}
           alt='Hero Image'
-          fill // Use layout='fill' to make the image cover the entire div
+         layout='fill' // Use layout='fill' to make the image cover the entire div
         // Important for responsiveness
         />
 
         <div className="absolute inset-0 flex items-center">
           <div className="w-1/2 flex justify-start items-center pl-4 md:pl-8 lg:pl-12">
             <div className="text-[#FFFFFF] font-lato font-bold text-[22px] leading-[30px] md:leading-[70px] md:text-[36px] lg:text-[48px] [@media(min-width:1750px)]:text-[60px] [@media(min-width:2000px)]:text-[68px] tracking-[2%]">
-            Next-Gen AI Solutions for Modern Enterprises and Healthcare
+            Next-Gen AI Solutions for Healthcare
             </div>
           </div>
         </div>
