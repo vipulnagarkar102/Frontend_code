@@ -71,7 +71,7 @@ const PlanFeatures: React.FC = () => {
         enterprisePlan: <Check className="h-8  w-8 text-white p-2 rounded-full bg-[#00A897] mx-auto" />
       },
       {
-        name: "On-demand code access",
+        name: "Pay per code",
         emergingTech: <Check className="h-8  w-8 text-white p-2 rounded-full bg-[#00A897] mx-auto" />,
         healthTechAI: <Check className="h-8  w-8 text-white p-2 rounded-full bg-[#00A897] mx-auto" />,
         flexPicks: <Check className="h-8  w-8 text-white p-2 rounded-full bg-[#00A897] mx-auto" />,
@@ -86,8 +86,8 @@ const PlanFeatures: React.FC = () => {
       },
       {
         name: "Recurring Billing",
-        emergingTech: "Monthly auto renewal",
-        healthTechAI: "Monthly auto renewal",
+        emergingTech: "Monthly or Annual Auto Renewal",
+        healthTechAI: "Monthly or Annual Auto Renewal",
         flexPicks: "One time purchase",
         enterprisePlan: "-"
       },
