@@ -19,9 +19,9 @@ const PlanFeatures: React.FC = () => {
       payPerCode: <Check className="h-8 w-8 text-white p-2 rounded-full bg-[#00A897] mx-auto" />
     },
     {
-      name: "Continuous Monthly Code",
-      entitledPlan: "1 Month",
-      payPerCode: "Learn & Purchase: Unlock Two Codes Monthly"
+      name: "Continuous Solution Code",
+      entitledPlan: "Start with One Code — Unlock Your Next Code After 35 Days",
+      payPerCode: "Access Two Codes Now — Eligible for Next Code in 35 Days"
     },
     {
       name: "Auto-deployment pipeline guide video",
@@ -34,7 +34,7 @@ const PlanFeatures: React.FC = () => {
       payPerCode: "-"
     },
     {
-      name: "Faster access to additional code (even for i completed videos)",
+      name: "Faster access to additional code (even for incomplete video)",
       entitledPlan: "-",
       payPerCode: <Check className="h-8 w-8 text-white p-2 rounded-full bg-[#00A897] mx-auto" />
     },
@@ -44,7 +44,7 @@ const PlanFeatures: React.FC = () => {
       payPerCode: "Email Support"
     },
     {
-      name: "Access to all versions of the code",
+      name: "Complimentary Access to All Future Code Updates",
       entitledPlan: <Check className="h-8 w-8 text-white p-2 rounded-full bg-[#00A897] mx-auto" />,
       payPerCode: <Check className="h-8 w-8 text-white p-2 rounded-full bg-[#00A897] mx-auto" />
     }
