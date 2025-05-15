@@ -1,23 +1,29 @@
-'use client';
-import React from 'react';
-import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
-import { ArrowDown } from 'lucide-react';
+"use client";
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { ArrowDown } from "lucide-react";
 
 interface PricingsPlanProps {
-  title: string;      // e.g. "Emerging tech"
-  price: number;      // e.g. 600
-  isAnnual: boolean;  // toggle state
+  title: string; // e.g. "Emerging tech"
+  price: number; // e.g. 600
+  desc: string;
+  isAnnual: boolean; // toggle state
 }
 
-const PricingsPlan: React.FC<PricingsPlanProps> = ({ title, price, isAnnual }) => {
+const PricingsPlan: React.FC<PricingsPlanProps> = ({
+  title,
+  price,
+  desc,
+  isAnnual,
+}) => {
   const router = useRouter();
   // Format the numeric price as dollars
   const formattedPrice = `$${price.toFixed(2)}`;
 
   const handleClick = () => {
-    if (title === 'FlexPick') {
-      router.push('/flexpick-plan'); // Only redirect if plan is FlexPick
+    if (title === "FlexPick") {
+      router.push("/flexpick-plan"); // Only redirect if plan is FlexPick
     }
   };
 
@@ -42,15 +48,28 @@ const PricingsPlan: React.FC<PricingsPlanProps> = ({ title, price, isAnnual }) =
         <p className="font-poppins text-[22px] [@media(min-width:1750px)]:text-[30px] font-semibold">
           {formattedPrice}
           <span className="text-[18px] [@media(min-width:1750px)]:text-[24px] font-normal">
-            / {isAnnual ? 'Year' : 'Month'}
+            / {isAnnual ? "Year" : "Month"}
           </span>
         </p>
       </div>
 
+      {/* 1) desc */}
+      <div>
+        <ul className="list-inside text-left font-lato text-[16px] [@media(min-width:1750px)]:text-[22px] space-y-1">
+          {desc.split(",").map((item, index) => (
+            <li key={index}>{item.trim()}</li>
+          ))}
+        </ul>
+      </div>
+
       {/* 3) Call-to-Action Button */}
       <div>
-        <Button onClick={handleClick} className="w-full bg-[#00A5CF] hover:bg-[#00A5CF] text-white font-lato py-4 font-semibold cursor-pointer">
-          START SUBSCRIPTION <ArrowDown size={24} className="inline-block rotate-225" />
+        <Button
+          onClick={handleClick}
+          className="w-full bg-[#00A5CF] hover:bg-[#00A5CF] text-white font-lato py-4 font-semibold cursor-pointer"
+        >
+          START SUBSCRIPTION{" "}
+          <ArrowDown size={24} className="inline-block rotate-225" />
         </Button>
       </div>
     </div>
