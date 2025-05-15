@@ -15,6 +15,7 @@ type RawApiResponse = {
       plan_type: string;
       price: number;
       currency: string;
+      desc: string;
     }>
   >;
 };
@@ -27,7 +28,7 @@ export default function ClientPricing({
   onToggle: (v: boolean) => void;
 }) {
   const [isAnnual, setIsAnnual] = useState(initialAnnual);
-  const [plans, setPlans]       = useState<Array<{ title: string; price: number }>>([]);
+  const [plans, setPlans]       = useState<Array<{ title: string; price: number; desc: string }>>([]);
 
   // Lift toggle state up
   const handleToggle = () => {
@@ -44,7 +45,7 @@ export default function ClientPricing({
 
       const flat = Object.values(json.data)
         .flat()
-        .map(p => ({ title: p.plan_type, price: p.price }));
+        .map(p => ({ title: p.plan_type, price: p.price, desc: p.desc }));
 
       setPlans(flat);
     }
@@ -83,6 +84,7 @@ export default function ClientPricing({
             key={idx}
             title={plan.title}
             price={plan.price}
+            desc={plan.desc}
             isAnnual={isAnnual}
           />
         ))}
