@@ -7,7 +7,7 @@ import { ArrowDown } from "lucide-react";
 interface PricingsPlanProps {
   title: string; // e.g. "Emerging tech"
   price: number; // e.g. 600
-  desc: string;
+  desc: string[];
   isAnnual: boolean; // toggle state
 }
 
@@ -55,12 +55,12 @@ const PricingsPlan: React.FC<PricingsPlanProps> = ({
 
       {/* 1) desc */}
       <div>
-        <ul className="list-inside text-left font-lato text-[16px] [@media(min-width:1750px)]:text-[22px] space-y-1">
-          {desc.split(",").map((item, index) => (
-            <li key={index}>{item.trim()}</li>
-          ))}
-        </ul>
-      </div>
+  <ul className="list-disc list-inside text-left font-lato text-[16px] [@media(min-width:1750px)]:text-[22px] space-y-1">
+    {desc.map((item, index) => (
+      <li key={index}>{item}</li>
+    ))}
+  </ul>
+</div>
 
       {/* 3) Call-to-Action Button */}
       <div>
