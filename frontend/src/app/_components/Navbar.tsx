@@ -64,7 +64,7 @@ const Navbar = () => {
         <Link href="/blogs">
           <div
             className={`cursor-pointer py-1 ${
-              pathname === "/blogs"
+              pathname === "/flexpick-plan"
                 ? "text-teal-400 font-bold"
                 : "text-[#FFFFFF]"
             } hover:text-teal-300 transition`}
