@@ -30,14 +30,14 @@ const AboutUs = () => {
         </div>
       </div>
 
-      <div className='mt-24 mb-4 px-8 md:px-12 lg:px-24 xl:px-64 gap-6 flex flex-col items-center justify-center text-center'>
+      {/* <div className='mt-24 mb-4 px-8 md:px-12 lg:px-24 xl:px-64 gap-6 flex flex-col items-center justify-center text-center'>
         <div>
           <p className='font-poppins font-bold text-[32px] md:text-[50px] [@media(min-width:1750px)]:text-[64px] md:text-center leading-[42px] md:leading-[55px] [@media(min-width:1750px)]:leading-[75px] tracking-[1%] text-center '>Building innovative solutions is at the core of everything we do.</p>
         </div>
         <div>
           <p className='font-lato font-normal text-[20px] md:text-[22px] [@media(min-width:1750px)]:text-[28px] leading-[120%] [@media(min-width:1750px)]:leading-[140%] tracking-[0%] md:text-center text-center'>At VtexAI, we are driven by resilience and a passion for innovation, leveraging cutting-edge technology to transform patient care. We challenge conventional thinking, unlocking new possibilities to improve health outcomes worldwide. Our mission is clear: The VtexAI Collective—driving groundbreaking innovations for a healthier future.</p>
         </div>
-      </div>
+      </div> */}
 
       {/* Our values */}
 
