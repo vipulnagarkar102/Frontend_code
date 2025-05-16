@@ -88,12 +88,18 @@ const Login = () => {
     try {
       await login(payload);
       const state = useAuthStore.getState();
+      if (state.requiresVerification && state.userIdForVerification) {
+         toast.success('Login successful! Please verify your email to activate your account.', toastSuccessStyle);
+         router.push('/auth/verify-email');
+         return;
+      }
       if (state.isAuthenticated) {
          toast.success('Login Successful!', toastSuccessStyle);
          router.push('/customer-dashboard');
       }
     } catch (err: any) {
        const latestError = useAuthStore.getState().error;
+        console.error("Login Error:", useAuthStore.getState());
        toast.error(latestError || 'Login failed. Please check credentials.', toastErrorStyle);
        if (recaptchaRef.current) { recaptchaRef.current.reset(); setCaptchaToken(null); }
     }

@@ -8,6 +8,7 @@ import { FaKey } from 'react-icons/fa';
 import Link from 'next/link';
 import img from '@/assets/pay-per-code.png'
 import Image from 'next/image';
+import toast from 'react-hot-toast'; // Import toast
 
 const RESEND_COOLDOWN_SECONDS = 60; // Cooldown time in seconds
 
@@ -74,35 +75,37 @@ const VerifyEmail = () => {
     setResendMessage('');
 
     if (!otp || otp.length !== 6) {
-      useAuthStore.setState({ error: "Please enter a valid 6-digit OTP." });
-      return;
+        useAuthStore.setState({ error: "Please enter a valid 6-digit OTP." });
+        return;
     }
 
     if (!userIdForVerification) {
-         useAuthStore.setState({ error: "Verification session expired or invalid. Please try registering again." });
-         return;
+        useAuthStore.setState({ error: "Verification session expired or invalid. Please try registering again." });
+        return;
     }
 
     try {
-      const success = await verifyEmail(otp);
-      if (success) {
-        console.log('Email verified successfully, redirecting to login...');
-        alert('Email verified successfully! Redirecting to login.');
-        router.push('/auth/login');
-      }
+        const success = await verifyEmail(otp);
+        console.log("Verification success:", success);
+        if (success) {
+            toast.success('Email verified successfully! Redirecting to login.');
+            router.push('/auth/login');
+        } else {
+            toast.error('Invalid or expired verification code. Please try again.');
+        }
     } catch (err) {
-      console.error("Verification failed in component:", err);
+        toast.error('Verification failed. Please try again.');
     }
-  };
+};
 
-  // Handler for the Resend OTP button
-  const handleResendOtp = async () => {
+// Handler for the Resend OTP button
+const handleResendOtp = async () => {
     clearError(); // Clear general error
     setResendMessage(''); // Clear previous resend message
 
-     if (!userIdForVerification) {
-         useAuthStore.setState({ error: "Cannot resend OTP without a valid session. Please try registering again." });
-         return;
+    if (!userIdForVerification) {
+        useAuthStore.setState({ error: "Cannot resend OTP without a valid session. Please try registering again." });
+        return;
     }
 
     const result = await resendOtp(); // Call the store action
@@ -110,29 +113,30 @@ const VerifyEmail = () => {
     setResendMessage(result.message); // Display message from the action (success or error)
 
     if (result.success) {
-      setResendDisabled(true); // Disable button
-      setCountdown(RESEND_COOLDOWN_SECONDS); // Start countdown
+        toast.success('OTP sent successfully!');
+        setResendDisabled(true); // Disable button
+        setCountdown(RESEND_COOLDOWN_SECONDS); // Start countdown
 
-      // Clear existing timer if any
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-      }
+        // Clear existing timer if any
+        if (timerRef.current) {
+            clearInterval(timerRef.current);
+        }
 
-      // Start new countdown timer
-      timerRef.current = setInterval(() => {
-        setCountdown((prevCount) => {
-          if (prevCount <= 1) {
-            clearInterval(timerRef.current!);
-            setResendDisabled(false); // Re-enable button
-            return 0;
-          }
-          return prevCount - 1;
-        });
-      }, 1000);
+        // Start new countdown timer
+        timerRef.current = setInterval(() => {
+            setCountdown((prevCount) => {
+                if (prevCount <= 1) {
+                    clearInterval(timerRef.current!);
+                    setResendDisabled(false); // Re-enable button
+                    return 0;
+                }
+                return prevCount - 1;
+            });
+        }, 1000);
+    } else {
+        toast.error(result.message || 'Failed to resend OTP. Please try again.');
     }
-    // If !result.success, the error message is already set in resendMessage
-    // and the general error might be set in storeError by the action
-  };
+};
 
 
   return (
