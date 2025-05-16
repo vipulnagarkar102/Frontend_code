@@ -74,7 +74,11 @@ export default function ClientPricing({
           <div><p>Advanced AI solutions</p></div>
           <div>
             <p className="font-poppins text-[22px] [@media(min-width:1750px)]:text-[30px] font-semibold">$0</p>
+
+           
+
             <p className="font-lato text-[16px] [@media(min-width:1750px)]:text-[22px]">No credit card required</p>
+
           </div>
           <div>
             <Button className="w-full bg-[#00A5CF] hover:bg-[#00A5CF] text-white font-lato py-4 font-semibold">

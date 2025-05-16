@@ -56,7 +56,9 @@ export const useAuthStore = create<AuthState>((set, get) => ({
          throw new Error('CAPTCHA token is missing in payload');
       }
       const response = await apiClient.post<RegisterResponse>('/users/createUser', payload);
+      console.log("Registration response user:", response.data.user);
       const userId = response.data.user.id;
+      console.log("User ID for verification:", userId);
       set({
         isLoading: false,
         userIdForVerification: userId,
@@ -121,7 +123,20 @@ export const useAuthStore = create<AuthState>((set, get) => ({
          throw new Error('CAPTCHA token is missing in payload');
       }
       const response = await apiClient.post<LoginResponse>('/auth/login', payload);
+      console.log("Login response:", response.data);
       const { data: userData, token } = response.data;
+      if (userData.status !== 'active') {
+        set({
+          isLoading: false,
+          requiresVerification: true,
+          userIdForVerification: userData.id,
+          error: 'Account is not active. Please verify your email to activate your account.'
+        });
+        // Redirect to verify-email page using router
+        const router = require('next/router').useRouter();
+        router.push('/auth/verify-email');
+        return;
+      }
       const user: User = {
           id: userData.id,
           status: userData.status,
@@ -133,11 +148,21 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         user, token, isAuthenticated: true, isLoading: false, error: null, isAuthInitialized: true,
       });
     } catch (error: any) {
-      const errorMessage = getErrorMessage(error);
-      console.error("Login API Error:", error.response?.status, errorMessage);
-      clearAuthState(set);
-      set({ error: errorMessage });
-      throw new Error(errorMessage);
+        if (error.response?.status === 403) {
+          set({
+            isLoading: false,
+            requiresVerification: true,
+            userIdForVerification: error.response.data?.userId,
+            error: error.response.data?.message || 'Account is not active. Please verify your email to activate your account.'
+          });
+          console.log("User requires verification:", error.response.data?.userId);
+          return;
+        }
+        const errorMessage = getErrorMessage(error);
+        console.error("Login API Error:", error.response?.status, errorMessage);
+        clearAuthState(set);
+        set({ error: errorMessage });
+        throw new Error(errorMessage);
     }
   },
 
