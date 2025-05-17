@@ -127,6 +127,7 @@ export const useAuthStore = create<AuthState>()(
       const response = await apiClient.post<LoginResponse>('/auth/login', payload);
       console.log("Login response:", response.data);
       const { data: userData, token } = response.data;
+      console.log(response.data);
       if (userData.status !== 'active') {
         set({
           isLoading: false,
@@ -150,6 +151,13 @@ export const useAuthStore = create<AuthState>()(
         user, token, isAuthenticated: true, isLoading: false, error: null, isAuthInitialized: true,
       });
     } catch (error: any) {
+        if (error.response?.status === 401) {
+          set({
+            isLoading: false,
+            error: 'Invalid credentials. Please check your email and password.',
+          });
+          return;
+        }
         if (error.response?.status === 403) {
           set({
             isLoading: false,
@@ -157,11 +165,9 @@ export const useAuthStore = create<AuthState>()(
             userIdForVerification: error.response.data?.userId,
             error: error.response.data?.message || 'Account is not active. Please verify your email to activate your account.'
           });
-          console.log("User requires verification:", error.response.data?.userId);
           return;
         }
         const errorMessage = getErrorMessage(error);
-        console.error("Login API Error:", error.response?.status, errorMessage);
         clearAuthState(set);
         set({ error: errorMessage });
         throw new Error(errorMessage);
