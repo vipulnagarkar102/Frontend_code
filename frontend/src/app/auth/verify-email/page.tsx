@@ -9,6 +9,7 @@ import Link from 'next/link';
 import img from '@/assets/pay-per-code.png'
 import Image from 'next/image';
 import toast from 'react-hot-toast'; // Import toast
+import useRefreshRouterEffect from '@/hooks/useRefreshRouterEffect';
 
 const RESEND_COOLDOWN_SECONDS = 60; // Cooldown time in seconds
 
@@ -59,6 +60,8 @@ const VerifyEmail = () => {
     }
   }, [isAuthenticated, isAuthInitialized, router]);
 
+  // Add the custom hook at the top level of the component
+  useRefreshRouterEffect();
 
   const handleOtpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, '');

@@ -6,19 +6,14 @@ import { usePathname, useRouter } from "next/navigation";
 import Sidebar from './Sidebar'; 
 import vtexlogo from '@/assets/vtexlogo .png'; 
 import Image from 'next/image';
-import { useAuthStore } from '@/store/authStore';
+import { useAuthStore } from '@/store/authStore'; // Re-added authStore import
 
 const Navbar = () => {
   const pathname = usePathname(); 
   const router = useRouter(); 
 
   // Get state and actions from the Zustand store
-  const { isAuthenticated, isAuthInitialized, initializeAuth, logout } = useAuthStore();
-
-
-  useEffect(() => {
-    initializeAuth();
-  }, [initializeAuth]);
+  const { isAuthenticated, logout } = useAuthStore();
 
   const handleLogout = async () => {
     await logout(); 
@@ -30,7 +25,7 @@ const Navbar = () => {
       {/* Logo */}
       <div>
         <Link href={isAuthenticated ? "/customer-dashboard" : "/"}> {/* Link logo to dashboard if logged in */}
-          <div className='ml-2 md:ml-4 cursor-pointer'>
+          <div className="ml-2 md:ml-4 cursor-pointer">
             <Image
               src={vtexlogo}
               alt='Vtex.AI'
@@ -81,53 +76,44 @@ const Navbar = () => {
             FlexPick Marketplace
           </div>
         </Link>
-
+        
         {/* Protected Links - Show only if authenticated */}
         {isAuthenticated && (
           <>
             <Link href='/flexpick-plan'>
-              <div className={`cursor-pointer py-1 ${pathname === '/flexpick-plan' ? "text-teal-400 font-bold" : "text-[#FFFFFF]"
-                } hover:text-teal-300 transition`}>
-                FlexPick Plan
-              </div>
+              <div className={`cursor-pointer py-1 ${pathname === '/flexpick-plan' ? "text-teal-400 font-bold" : "text-[#FFFFFF]"} hover:text-teal-300 transition`}>FlexPick Plan</div>
             </Link>
 
             <Link href='/customer-dashboard'>
-              {/* Ensure correct path checking */}
-              <div className={`cursor-pointer py-1 ${pathname === '/customer-dashboard' ? "text-teal-400 font-bold" : "text-[#FFFFFF]"
-                } hover:text-teal-300 transition`}>
-                Dashboard
-              </div>
+              <div className={`cursor-pointer py-1 ${pathname === '/customer-dashboard' ? "text-teal-400 font-bold" : "text-[#FFFFFF]"} hover:text-teal-300 transition`}>Dashboard</div>
             </Link>
           </>
         )}
 
-        {/* Authentication Buttons - Conditional rendering */}
-        <div className='ml-4'> 
-          {!isAuthInitialized ? (
-            // Optional: Show a loading state while checking auth
-            <Button variant="custom" disabled className='font-medium p-5'>Loading...</Button>
-          ) : isAuthenticated ? (
-            // Show Logout button if authenticated
-            <Button
-              variant="custom"
-              onClick={handleLogout}
-              className='font-medium p-5 cursor-pointer bg-red-600 hover:bg-red-700' // Example styling for logout
-            >
-              LOGOUT
-            </Button>
-          ) : (
-            // Show Login button if not authenticated
-            <Link href='/auth/login'>
-              <Button variant="custom" className='font-medium p-5 cursor-pointer'>LOGIN</Button>
-            </Link>
-          )}
-        </div>
+      </div>
+
+      {/* Authentication Buttons - Conditional rendering */}
+      <div className='ml-4'> 
+        {isAuthenticated ? (
+          // Show Logout button if authenticated
+          <Button
+            variant="custom"
+            onClick={handleLogout}
+            className='font-medium p-5 cursor-pointer bg-red-600 hover:bg-red-700' // Example styling for logout
+          >
+            LOGOUT
+          </Button>
+        ) : (
+          // Show Login button if not authenticated
+          <Link href='/auth/login'>
+            <Button variant="custom" className='font-medium p-5 cursor-pointer'>LOGIN</Button>
+          </Link>
+        )}
       </div>
 
       {/* Mobile Navigation Trigger */}
       <div className='lg:hidden'>
-        <Sidebar isAuthenticated={isAuthenticated} isAuthInitialized={isAuthInitialized} />
+        <Sidebar />
       </div>
 
     </div>
