@@ -1,6 +1,6 @@
 "use client";
-import React, { useEffect } from 'react';
-import { Button } from '@/components/ui/button';
+import React, { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation"; 
 import Sidebar from './Sidebar'; 
@@ -9,19 +9,20 @@ import Image from 'next/image';
 import { useAuthStore } from '@/store/authStore'; // Re-added authStore import
 
 const Navbar = () => {
-  const pathname = usePathname(); 
-  const router = useRouter(); 
+  const pathname = usePathname();
+  const router = useRouter();
 
   // Get state and actions from the Zustand store
   const { isAuthenticated, logout } = useAuthStore();
 
+
   const handleLogout = async () => {
-    await logout(); 
-    router.push('/auth/login');
+    await logout();
+    router.push("/auth/login");
   };
 
   return (
-    <div className='border-b-1 border-[#0C5070] w-screen fixed top-8 z-50 px-8 h-[72px] [@media(min-width:1750px)]:h-[90px] bg-[#003F5C] text-white flex flex-row justify-between items-center'>
+    <div className="border-b-1 border-[#0C5070] w-screen fixed top-8 z-50 px-8 h-[72px] [@media(min-width:1750px)]:h-[90px] bg-[#003F5C] text-white flex flex-row justify-between items-center">
       {/* Logo */}
       <div>
         <Link href={isAuthenticated ? "/customer-dashboard" : "/"}> {/* Link logo to dashboard if logged in */}
@@ -37,39 +38,73 @@ const Navbar = () => {
       </div>
 
       {/* Desktop Navigation */}
-      <div className='hidden lg:flex flex-row justify-center items-center gap-6 text-lg [@media(min-width:1750px)]:text-[24px] font-poppins'>
-
+      <div className="hidden lg:flex flex-row justify-center items-center gap-6 text-lg [@media(min-width:1750px)]:text-[24px] font-poppins">
         {/* Public Links */}
-        <Link href='/'>
-          <div className={`cursor-pointer py-1 ${pathname === '/' ? "text-teal-400 font-bold" : "text-[#FFFFFF]"
-            } hover:text-teal-300 transition`}>
+        <Link href="/">
+          <div
+            className={`cursor-pointer py-1 ${
+              pathname === "/" ? "text-teal-400 font-bold" : "text-[#FFFFFF]"
+            } hover:text-teal-300 transition`}
+          >
             Home
           </div>
         </Link>
-        <Link href='/pricings'>
-          <div className={`cursor-pointer py-1 ${pathname === '/pricings' ? "text-teal-400 font-bold" : "text-[#FFFFFF]"
-            } hover:text-teal-300 transition`}>
+        <Link href="/offering">
+          <div
+            className={`cursor-pointer py-1 ${
+              pathname === "/offering"
+                ? "text-teal-400 font-bold"
+                : "text-[#FFFFFF]"
+            } hover:text-teal-300 transition`}
+          >
             Our offerings
           </div>
         </Link>
-        <Link href='/about-us'>
-          <div className={`cursor-pointer py-1 ${pathname === '/about-us' ? "text-teal-400 font-bold" : "text-[#FFFFFF]"
-            } hover:text-teal-300 transition`}>
+        <Link href="/blogs">
+          <div
+            className={`cursor-pointer py-1 ${
+              pathname === "/flexpick-plan"
+                ? "text-teal-400 font-bold"
+                : "text-[#FFFFFF]"
+            } hover:text-teal-300 transition`}
+          >
+            FlexPick Marketplace
+          </div>
+        </Link>
+        <Link href="/about-us">
+          <div
+            className={`cursor-pointer py-1 ${
+              pathname === "/about-us"
+                ? "text-teal-400 font-bold"
+                : "text-[#FFFFFF]"
+            } hover:text-teal-300 transition`}
+          >
             About Us
           </div>
         </Link>
-        <Link href='/partners'>
-          <div className={`cursor-pointer py-1 ${pathname === '/partners' ? "text-teal-400 font-bold" : "text-[#FFFFFF]"
-            } hover:text-teal-300 transition`}>
+        <Link href="/partners">
+          <div
+            className={`cursor-pointer py-1 ${
+              pathname === "/partners"
+                ? "text-teal-400 font-bold"
+                : "text-[#FFFFFF]"
+            } hover:text-teal-300 transition`}
+          >
             Partners
           </div>
         </Link>
-        <Link href='/blogs'>
-          <div className={`cursor-pointer py-1 ${pathname === '/blogs' ? "text-teal-400 font-bold" : "text-[#FFFFFF]"
-            } hover:text-teal-300 transition`}>
+        <Link href="/blogs">
+          <div
+            className={`cursor-pointer py-1 ${
+              pathname === "/blogs"
+                ? "text-teal-400 font-bold"
+                : "text-[#FFFFFF]"
+            } hover:text-teal-300 transition`}
+          >
             Blogs
           </div>
         </Link>
+
         <Link href='/flexpick-plan'>
           <div className={`cursor-pointer py-1 ${pathname === '/blogs' ? "text-teal-400 font-bold" : "text-[#FFFFFF]"
             } hover:text-teal-300 transition`}>
@@ -86,6 +121,7 @@ const Navbar = () => {
 
             <Link href='/customer-dashboard'>
               <div className={`cursor-pointer py-1 ${pathname === '/customer-dashboard' ? "text-teal-400 font-bold" : "text-[#FFFFFF]"} hover:text-teal-300 transition`}>Dashboard</div>
+
             </Link>
           </>
         )}
@@ -114,10 +150,10 @@ const Navbar = () => {
       {/* Mobile Navigation Trigger */}
       <div className='lg:hidden'>
         <Sidebar />
-      </div>
 
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Navbar;

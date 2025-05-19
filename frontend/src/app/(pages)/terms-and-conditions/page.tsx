@@ -37,11 +37,11 @@ export default function TermsAndConditionsPage() {
          <div className="mt-8 md:mt-12">
           <h2 className="text-[40px] [@media(min-width:1750px)]:text-[56px] font-semibold font-poppins mb-4">Downloads</h2>
           <div className="flex flex-col space-y-2">
-            <a href="/Copyright Takedown Notice Form.docx" download className="font-normal text-[18px] [@media(min-width:1750px)]:text-[22px] hover:underline flex items-center">
+            <a href="/Trade Mark Takedown Notice Form.docx " download className="font-normal text-[18px] [@media(min-width:1750px)]:text-[22px] hover:underline flex items-center">
               <span>Trade Mark Takedown Notice Form</span>
               <ArrowDown size={16} className="ml-1" />
             </a>
-            <a href="/Trade Mark Takedown Notice Form.docx" download className="font-normal text-[18px] [@media(min-width:1750px)]:text-[22px] hover:underline flex items-center">
+            <a href="/Copyright Takedown Notice Form.docx" download className="font-normal text-[18px] [@media(min-width:1750px)]:text-[22px] hover:underline flex items-center">
               <span>Copyright Takedown Notice Form</span>
               <ArrowDown size={16} className="ml-1" />
             </a>
