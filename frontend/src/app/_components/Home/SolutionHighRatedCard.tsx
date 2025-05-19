@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
+import CustomCarousel from "@/components/ui/CustomCarousel";
 
 interface Video {
   _id: string;
@@ -50,25 +51,27 @@ const HighRatedCard = () => {
   if (loading) return <p>Loading top-rated videos...</p>;
 
   return (
-    <div className="flex flex-row justify-start gap-6 w-full px-4 py-10">
-      {videos.slice(0, 10).map((video) => (
-        <div
-          key={video._id}
-          className="basis-[90%] sm:basis-[48%] md:basis-[31%] lg:basis-[23%] xl:basis-[18%] bg-gradient-to-b from-[#00A5CF]/30 via-[#FFFFFF]/30 to-[#00A5CF]/5 text-[#003F5C] rounded-2xl p-4 shadow-md flex flex-col items-center"
-        >
-          <Image
-            src={video.link}
-            alt={video.title}
-            width={1000}
-            height={500}
-            className="rounded-md object-cover w-full h-[150px]"
-          />
-          <p className="mt-4 text-left font-semibold line-clamp-2 text-sm">
-            {video.title}
-          </p>
-          <StarRating rating={Math.min(5, video.ratings)}  />
-        </div>
-      ))}
+    <div className="w-full overflow-x-hidden mt-5 px-4">
+      <CustomCarousel visibleCards={5}>
+        {videos.map((video) => (
+          <div
+            key={video._id}
+            className="w-[300px] bg-white shadow-md rounded-lg p-4"
+          >
+            <Image
+              src={video.link}
+              alt={video.title}
+              width={1000}
+              height={500}
+              className="rounded-md object-cover w-full h-[150px]"
+            />
+            <p className="mt-4 text-left font-semibold line-clamp-2 text-sm">
+              {video.title}
+            </p>
+            <StarRating rating={Math.min(5, video.ratings)} />
+          </div>
+        ))}
+      </CustomCarousel>
     </div>
   );
 };

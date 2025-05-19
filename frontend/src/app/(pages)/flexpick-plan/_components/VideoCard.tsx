@@ -20,7 +20,7 @@ const VideoCard = ({videoId, title, thumbnail, tags, rating = 3 }: VideoCardProp
     <div className='flex flex-col w-[250px] min-h-[320px] justify-between gap-3 p-6 bg-gradient-to-b from-[#00A5CF]/30 via-[#FFFFFF]/30 to-[#00A5CF]/5 text-[#003F5C] rounded-2xl'>
       <div className="relative h-36 w-full">
         <Image 
-          src={DummyImage} 
+          src={thumbnail} 
           alt={title} 
           fill
           className="object-cover rounded-lg"
