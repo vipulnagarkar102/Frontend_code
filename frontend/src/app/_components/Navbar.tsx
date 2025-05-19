@@ -50,10 +50,10 @@ const Navbar = () => {
             Home
           </div>
         </Link>
-        <Link href="/pricings">
+        <Link href="/offering">
           <div
             className={`cursor-pointer py-1 ${
-              pathname === "/pricings"
+              pathname === "/offering"
                 ? "text-teal-400 font-bold"
                 : "text-[#FFFFFF]"
             } hover:text-teal-300 transition`}
