@@ -70,7 +70,7 @@ const Navbar = () => {
             Blogs
           </div>
         </Link>
-        <Link href='/blogs'>
+        <Link href='/flexpick-plan'>
           <div className={`cursor-pointer py-1 ${pathname === '/blogs' ? "text-teal-400 font-bold" : "text-[#FFFFFF]"
             } hover:text-teal-300 transition`}>
             FlexPick Marketplace
