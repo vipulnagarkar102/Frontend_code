@@ -67,7 +67,7 @@ const VideoDetails: React.FC<VideoProps> = ({ video }) => {
             FlexPick plan
           </span>
           <div className="mt-8 relative rounded-[30px] overflow-hidden w-full h-[240px] md:h-[340px] lg:h-[420px]">
-            <Image src={HeroImage} alt="Hero Image" layout="fill" objectFit="cover" />
+            <Image src={HeroImage} alt="Hero Image" fill objectFit="cover" />
           </div>
           <div className="border-b border-gray-200 my-6">
             <nav className="flex space-x-8" aria-label="Tabs">

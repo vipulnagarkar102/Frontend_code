@@ -3,17 +3,22 @@
 import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
+import useRefreshRouterEffect from '@/hooks/useRefreshRouterEffect';
 
 export default function AuthSuccessPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { initializeAuth, isAuthenticated } = useAuthStore();
 
+  // Add the custom hook at the top level of the component
+  useRefreshRouterEffect();
+
   useEffect(() => {
     const token = searchParams.get('token');
     if (token) {
       if (typeof window !== 'undefined') {
         localStorage.setItem('tempAuthToken', token);
+        console.log("Temp token added");
       }
       initializeAuth()
         .then(() => router.push('/customer-dashboard'))
