@@ -1,14 +1,21 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { ArrowDown } from "lucide-react";
+import { useUserStore } from "../../../../store/userStore";
+
+// Define API base URL
+const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
+console.log("URL:",apiBase)
 
 interface PricingsPlanProps {
-  title: string; // e.g. "Emerging tech"
-  price: number; // e.g. 600
-  desc: string;
-  isAnnual: boolean; // toggle state
+  title: string;        // e.g. "Emerging tech"
+  price: number;        // e.g. 600
+  desc: string | string[];
+  isAnnual: boolean;
 }
 
 const PricingsPlan: React.FC<PricingsPlanProps> = ({
@@ -18,14 +25,100 @@ const PricingsPlan: React.FC<PricingsPlanProps> = ({
   isAnnual,
 }) => {
   const router = useRouter();
-  // Format the numeric price as dollars
+  const { profile, getUserProfile } = useUserStore();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Fetch user profile when component mounts
+  useEffect(() => {
+    if (!profile) {
+      getUserProfile();
+    }
+  }, [profile, getUserProfile]);
+
+  useEffect(() => {
+    // Test API connectivity
+    const testApiConnection = async () => {
+      try {
+        const response = await fetch(`${apiBase}/api/test`);
+        console.log("Response:",response)
+        if (!response.ok) {
+          throw new Error(`API test failed with status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log("API test successful:", data);
+      } catch (error) {
+        console.error("API test failed:", error);
+      }
+    };
+
+    testApiConnection();
+  }, []);
+
   const formattedPrice = `$${price.toFixed(2)}`;
 
-  const handleClick = () => {
-    if (title === "FlexPick") {
-      router.push("/flexpick-plan"); // Only redirect if plan is FlexPick
+  const handleCheckout = async () => {
+  try {
+    setIsLoading(true);
+    setError(null);
+
+    const planTitle = title;
+    const userEmail = profile?.email || 'guest@example.com';
+    const userId = profile?.id || 'guest';
+
+    console.log("Sending checkout request with:", {
+      title: planTitle,
+      email: userEmail,
+      userId: userId
+    });
+
+    const response = await fetch(`${apiBase}/api/create-checkout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: planTitle,
+        email: userEmail,
+        userId: userId,
+      }),
+    });
+
+    console.log("Checkout response status:", response.status);
+
+    if (!response.ok) {
+      let errorMessage;
+      try {
+        const errorData = await response.json();
+        errorMessage = errorData.message || `Checkout failed with status: ${response.status}`;
+      } catch (e) {
+        errorMessage = `Checkout failed with status: ${response.status}`;
+      }
+      throw new Error(errorMessage);
     }
-  };
+
+    const data = await response.json();
+    console.log("Checkout response data:", data);
+
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      throw new Error('No checkout URL received');
+    }
+  } catch (error: any) {
+    console.error('Checkout failed:', error);
+    setError(error.message || 'Payment processing failed. Please try again.');
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+
+  const descList = Array.isArray(desc)
+    ? desc
+    : typeof desc === "string"
+      ? desc.split(',')
+      : [];
 
   return (
     <div
@@ -36,14 +129,14 @@ const PricingsPlan: React.FC<PricingsPlanProps> = ({
                  justify-between p-8 gap-6 hover:scale-105 transition-transform
                  duration-200 bg-white border border-[#00A5CF]/20 shadow-md"
     >
-      {/* 1) Plan Title */}
+      {/* Title */}
       <div>
         <p className="pl-2 bg-gradient-to-r from-[#00A5CF]/30 via-[#00A5CF]/15 to-[#FFFFFF]/5">
           {title}
         </p>
       </div>
 
-      {/* 2) Price Display */}
+      {/* Price */}
       <div>
         <p className="font-poppins text-[22px] [@media(min-width:1750px)]:text-[30px] font-semibold">
           {formattedPrice}
@@ -53,23 +146,34 @@ const PricingsPlan: React.FC<PricingsPlanProps> = ({
         </p>
       </div>
 
-      {/* 1) desc */}
+      {/* Description */}
       <div>
+        <p className="text-[18px] [@media(min-width:1750px)]:text-[22px] font-normal">
+          Auto-Renews, Cancel Anytime, Full Content Access
+        </p>
         <ul className="list-inside text-left font-lato text-[16px] [@media(min-width:1750px)]:text-[22px] space-y-1">
-          {desc.split(",").map((item, index) => (
+          {descList.map((item, index) => (
             <li key={index}>{item.trim()}</li>
           ))}
         </ul>
       </div>
 
-      {/* 3) Call-to-Action Button */}
+      {/* Error message */}
+      {error && (
+        <div className="text-red-500 text-sm font-normal mb-2">
+          {error}
+        </div>
+      )}
+
+      {/* Button */}
       <div>
         <Button
-          onClick={handleClick}
+          onClick={handleCheckout}
+          disabled={isLoading}
           className="w-full bg-[#00A5CF] hover:bg-[#00A5CF] text-white font-lato py-4 font-semibold cursor-pointer"
         >
-          START SUBSCRIPTION{" "}
-          <ArrowDown size={24} className="inline-block rotate-225" />
+          {isLoading ? "PROCESSING..." : "START SUBSCRIPTION"}{" "}
+          {!isLoading && <ArrowDown size={24} className="inline-block rotate-225" />}
         </Button>
       </div>
     </div>

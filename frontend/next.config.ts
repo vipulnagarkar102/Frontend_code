@@ -1,7 +1,6 @@
-import type { NextConfig } from "next";
-import { NextConfigComplete } from "next/dist/server/config-shared";
+/** @type {import('next').NextConfig} */
 
-const securityHeaders: NextConfigComplete["headers"] = async () => {
+const securityHeaders = async () => {
   return [
     {
       source: "/(.*)",
@@ -27,14 +26,33 @@ const securityHeaders: NextConfigComplete["headers"] = async () => {
   ];
 };
 
-const nextConfig: NextConfig = {
+const nextConfig = {
+  reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ["vtexai.kinsta.cloud",'h2p.c25.myftpupload.com',"y55.fa4.myftpupload.com"],
+    domains: [
+      "vtexai.kinsta.cloud",
+      "h2p.c25.myftpupload.com",
+      "y55.fa4.myftpupload.com",
+    ],
   },
-  headers: securityHeaders,
+  async headers() {
+    return await securityHeaders();
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "http://localhost:2000/api/:path*",
+      },
+      {
+        source: "/create-checkout",
+        destination: "http://localhost:2000/create-checkout", 
+      },
+    ];
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
