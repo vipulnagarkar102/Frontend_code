@@ -12,6 +12,8 @@ import LoginImg from '@/assets/pay-per-code.png';
 import { Button } from '@/components/ui/button';
 import { useAuthStore } from '@/store/authStore';
 import { LoginPayload as BaseLoginPayload } from '@/store/authTypes';
+import useRefreshRouterEffect from '@/hooks/useRefreshRouterEffect';
+
 type LoginPayload = BaseLoginPayload;
 
 const toastErrorStyle = {
@@ -41,6 +43,8 @@ const Login = () => {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
+
+  useRefreshRouterEffect();
 
   useEffect(() => {
     if (isAuthInitialized && isAuthenticated) {
@@ -117,7 +121,7 @@ const Login = () => {
     <div className="mt-26 flex min-h-screen w-full flex-col lg:flex-row text-[#003F5C]">
       <div className="hidden lg:block lg:w-[40%] flex-shrink-0">
         <div className="h-full w-full relative">
-          <Image src={LoginImg} alt="Login" layout="fill" objectFit="cover" priority />
+          <Image src={LoginImg} alt="Login" fill objectFit="cover" priority />
         </div>
       </div>
 

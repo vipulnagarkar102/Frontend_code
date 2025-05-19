@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { subscribeWithSelector } from 'zustand/middleware';
 import { AuthState, RegisterPayload, LoginPayload, User, RegisterResponse, VerifyEmailResponse, LoginResponse, LogoutResponse, ResendOtpResponse } from './authTypes'; // Ensure paths are correct
 import apiClient from '../services/apiClient'; 
 
@@ -41,7 +42,8 @@ const clearAuthState = (set: (updater: (state: AuthState) => Partial<AuthState>)
 };
 
 
-export const useAuthStore = create<AuthState>((set, get) => ({
+export const useAuthStore = create<AuthState>()(
+  subscribeWithSelector((set, get) => ({
   // Initial State
   user: null, token: null, isAuthenticated: false, isLoading: false,
   isResendingOtp: false, error: null, userIdForVerification: null,
@@ -125,6 +127,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       const response = await apiClient.post<LoginResponse>('/auth/login', payload);
       console.log("Login response:", response.data);
       const { data: userData, token } = response.data;
+      console.log(response.data);
       if (userData.status !== 'active') {
         set({
           isLoading: false,
@@ -148,6 +151,13 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         user, token, isAuthenticated: true, isLoading: false, error: null, isAuthInitialized: true,
       });
     } catch (error: any) {
+        if (error.response?.status === 401) {
+          set({
+            isLoading: false,
+            error: 'Invalid credentials. Please check your email and password.',
+          });
+          return;
+        }
         if (error.response?.status === 403) {
           set({
             isLoading: false,
@@ -155,11 +165,9 @@ export const useAuthStore = create<AuthState>((set, get) => ({
             userIdForVerification: error.response.data?.userId,
             error: error.response.data?.message || 'Account is not active. Please verify your email to activate your account.'
           });
-          console.log("User requires verification:", error.response.data?.userId);
           return;
         }
         const errorMessage = getErrorMessage(error);
-        console.error("Login API Error:", error.response?.status, errorMessage);
         clearAuthState(set);
         set({ error: errorMessage });
         throw new Error(errorMessage);
@@ -187,6 +195,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     set({ isLoading: true });
   
     try {
+      console.log("initializeAuth called");
       // Check both permanent and temporary tokens
       const token = localStorage.getItem('authToken') || 
                    localStorage.getItem('tempAuthToken');
@@ -195,6 +204,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         console.log("No token found - not authenticated");
         set({ isAuthInitialized: true, isLoading: false });
         return;
+      } else {
+        console.log("Token found:", token);
       }
   
       console.log("Token found. Verifying...");
@@ -228,10 +239,12 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         throw new Error('Account not active');
       }
     } catch (error) {
-      console.error("Auth initialization failed:", error);
+      console.error("Error during initializeAuth:", error);
       clearAuthState(set);
       set({ isAuthInitialized: true });
       throw error;
+    } finally {
+      console.log("initializeAuth completed");
     }
   },
 
@@ -248,4 +261,12 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     set({ token });
   },
 
-}));
+  setAuthenticated: (isAuthenticated: boolean) => {
+    set({ isAuthenticated });
+  },
+
+  setAuthInitialized: (isAuthInitialized: boolean) => {
+    set({ isAuthInitialized });
+  },
+
+})));
