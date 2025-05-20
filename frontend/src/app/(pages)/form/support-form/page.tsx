@@ -113,8 +113,9 @@ export default function SupportForm() {
                 className="border p-2 rounded w-full font-normal text-sm md:text-base"
               >
                 <option value="">Select Plan</option>
-                <option value="basic">Basic Plan</option>
-                <option value="pro">Pro Plan</option>
+                <option value="Emerging">Emerging Tech</option>
+                <option value="HealthTech">HealthTech AI</option>
+                <option value="FlexPick">FlexPick Marketplace</option>
               </select>
             </div>
 
