@@ -81,7 +81,7 @@ const VideosPage = () => {
   return (
     <div className="w-full mx-auto mt-30 text-[#003F5C]">
       <div className="lg:w-[85%] flex flex-col md:items-center md:justify-between my-6 gap-4 mx-auto px-[12px]">
-        <h2 className="text-[40px] md:text-[50px] font-poppins font-semibold text-center">FlexPick Marketplace</h2>
+        {/* <h2 className="text-[40px] md:text-[50px] font-poppins font-semibold text-center">FlexPick Marketplace</h2> */}
 
         {/* Search Input with Button */}
         <div className="min-w-[65%] mt-4 relative font-lato font-normal text-[22px] flex justify-center">

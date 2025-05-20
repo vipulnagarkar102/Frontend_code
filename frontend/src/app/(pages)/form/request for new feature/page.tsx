@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import HeroImage from "@/assets/support.png";
+import HeroImage from "@/assets/Request for new feature image.png";
 
 export default function SupportForm() {
   const [formData, setFormData] = useState({

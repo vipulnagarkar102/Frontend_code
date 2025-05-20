@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import HeroImage from "@/assets/support.png";
+import HeroImage from "@/assets/Cancel Form image.png";
 
 export default function CancelForm() {
   const [formData, setFormData] = useState({

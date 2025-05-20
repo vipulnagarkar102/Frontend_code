@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import { ArrowDown } from "lucide-react";
 
 interface PricingsPlanProps {
-  title: string; // e.g. "Emerging tech"
-  price: number; // e.g. 600
+  title: string;
+  price: number;
   desc: string[];
-  isAnnual: boolean; // toggle state
+  isAnnual: boolean;
 }
 
 const PricingsPlan: React.FC<PricingsPlanProps> = ({
@@ -18,12 +18,17 @@ const PricingsPlan: React.FC<PricingsPlanProps> = ({
   isAnnual,
 }) => {
   const router = useRouter();
-  // Format the numeric price as dollars
+
+  // Format price
   const formattedPrice = `$${price.toFixed(2)}`;
+
+  // 🚀 Split comma-separated description if only 1 string is present
+  const parsedDesc =
+    desc.length === 1 ? desc[0].split(",").map((item) => item.trim()) : desc;
 
   const handleClick = () => {
     if (title === "FlexPick") {
-      router.push("/flexpick-plan"); // Only redirect if plan is FlexPick
+      router.push("/flexpick-plan");
     }
   };
 
@@ -36,14 +41,14 @@ const PricingsPlan: React.FC<PricingsPlanProps> = ({
                  justify-between p-8 gap-6 hover:scale-105 transition-transform
                  duration-200 bg-white border border-[#00A5CF]/20 shadow-md"
     >
-      {/* 1) Plan Title */}
+      {/* Plan Title */}
       <div>
         <p className="pl-2 bg-gradient-to-r from-[#00A5CF]/30 via-[#00A5CF]/15 to-[#FFFFFF]/5">
           {title}
         </p>
       </div>
 
-      {/* 2) Price Display */}
+      {/* Price */}
       <div>
         <p className="font-poppins text-[22px] [@media(min-width:1750px)]:text-[30px] font-semibold">
           {formattedPrice}
@@ -53,16 +58,18 @@ const PricingsPlan: React.FC<PricingsPlanProps> = ({
         </p>
       </div>
 
-      {/* 1) desc */}
+      {/* Description as bullet points */}
       <div>
-  <ul className="list-disc list-inside text-left font-lato text-[16px] [@media(min-width:1750px)]:text-[22px] space-y-1">
-    {desc.map((item, index) => (
-      <li key={index}>{item}</li>
-    ))}
-  </ul>
-</div>
+        <ul className="list-disc list-inside text-left font-lato text-[16px] [@media(min-width:1750px)]:text-[22px] space-y-1">
+          {parsedDesc.map((item, index) => (
+            <li key={index} className="marker:text-[#00A5CF]">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
 
-      {/* 3) Call-to-Action Button */}
+      {/* Button */}
       <div>
         <Button
           onClick={handleClick}
