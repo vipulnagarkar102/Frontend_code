@@ -18,7 +18,7 @@ const Home = () => {
           src={HeroImage}
           alt='Hero Image'
          layout='fill' // Use layout='fill' to make the image cover the entire div
-        // Important for responsiveness
+        // Important for responsiveness//
         />
 
         <div className="absolute inset-0 flex items-center">
