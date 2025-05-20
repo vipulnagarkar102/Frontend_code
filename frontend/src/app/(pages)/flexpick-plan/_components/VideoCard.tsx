@@ -57,21 +57,21 @@ const VideoCard = ({
         data-tooltip-id={tooltipId}
         data-tooltip-place={isLastColumn ? 'left' : 'right'}
       >
-        <div className="relative h-40 w-full">
-          <Image
-            src={thumbnail}
-            alt={title}
-            fill
-            className="object-cover rounded-lg"
-          />
-        </div>
-        <p className="font-poppins text-[16px] font-medium line-clamp-2">
-          {title}
-        </p>
-        <Link href={`/all-videos/${videoId}`}>
+        <Link href={`/flexpick-plan/${videoId}`}>
+          <div className="relative h-40 w-full">
+            <Image
+              src={thumbnail}
+              alt={title}
+              fill
+              className="object-cover rounded-lg"
+            />
+          </div>
+          <p className="font-poppins text-[16px] font-medium line-clamp-2">
+            {title}
+          </p>
           <Button
             variant="secondary"
-            className="bg-[#00A5CF] text-white hover:text-black font-lato font-semibold text-[16px] cursor-pointer"
+            className="bg-[#00A5CF] text-white hover:text-black font-lato font-semibold text-[16px] cursor-pointer mt-4"
           >
             Buy Now <span className="rotate-225"><ArrowDown size={30} /></span>
           </Button>

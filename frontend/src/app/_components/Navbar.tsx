@@ -60,17 +60,6 @@ const Navbar = () => {
             Our offerings
           </div>
         </Link>
-        <Link href="/blogs">
-          <div
-            className={`cursor-pointer py-1 ${
-              pathname === "/flexpick-plan"
-                ? "text-teal-400 font-bold"
-                : "text-[#FFFFFF]"
-            } hover:text-teal-300 transition`}
-          >
-            FlexPick Marketplace
-          </div>
-        </Link>
         <Link href="/about-us">
           <div
             className={`cursor-pointer py-1 ${
@@ -106,9 +95,9 @@ const Navbar = () => {
         </Link>
 
         <Link href='/flexpick-plan'>
-          <div className={`cursor-pointer py-1 ${pathname === '/blogs' ? "text-teal-400 font-bold" : "text-[#FFFFFF]"
+          <div className={`cursor-pointer py-1 ${pathname === '/flexpick-plan' ? "text-teal-400 font-bold" : "text-[#FFFFFF]"
             } hover:text-teal-300 transition`}>
-            FlexPick Marketplace
+            Marketplace
           </div>
         </Link>
         
