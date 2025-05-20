@@ -1,9 +1,22 @@
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { RiTwitterXFill, RiLinkedinLine, RiYoutubeLine } from "react-icons/ri";
 import vtexlogo from '@/assets/vtexlogo .png'
+import { useAuthStore } from '@/store/authStore';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { useRef, useState } from 'react';
 
 const Footer = () => {
+  const { isAuthenticated, logout } = useAuthStore();
+  const recaptchaRef = useRef(null);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+
+  const handleCaptchaChange = (token: string | null) => {
+    setCaptchaToken(token);
+  };
+
   return (
     <footer className="bottom-0 bg-[#003F5C] text-[#FFFFFF] py-8 [@media(min-width:1750px)]:p-10 sm:px-6">
       {/* Horizontal Wrapper */}
@@ -69,19 +82,31 @@ const Footer = () => {
         </div>
 
         {/* Subscription */}
-        <div className='flex flex-col gap-4 min-w-[240px]'>
-          <div className="text-[16px] sm:text-[20px] font-poppins font-medium">Subscribe for updates</div>
-          <div className="flex bg-white rounded-md">
-            <input
-              type="email"
-              placeholder="Enter Email Address"
-              className="text-gray-800 text-sm px-3 py-2 w-full focus:outline-none"
-            />
-            <button className="bg-teal-400 hover:bg-teal-500 text-white px-4 py-2 rounded-r-md">
-              →
-            </button>
+        {isAuthenticated && (
+          <div className='flex flex-col gap-4 min-w-[240px]'>
+            <div className="text-[16px] sm:text-[20px] font-poppins font-medium">Subscribe for updates</div>
+            <div className="flex bg-white rounded-md">
+              <input
+                type="email"
+                placeholder="Enter Email Address"
+                className="text-gray-800 text-sm px-3 py-2 w-full focus:outline-none"
+              />
+              <button
+                className="bg-teal-400 hover:bg-teal-500 text-white px-4 py-2 rounded-r-md"
+                disabled={!captchaToken} onClick={() => {alert('Subscribed!');}}
+              >
+                →
+              </button>
+            </div>
+            <div className="flex justify-center pt-2">
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_V2_SITE_KEY || ''}
+                onChange={handleCaptchaChange}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Copyright */}

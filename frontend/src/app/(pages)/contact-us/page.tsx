@@ -77,12 +77,12 @@ const ContactUs = () => {
                 to make your experience smooth and enjoyable.
               </p>
               <Link href="form/support-form">
-              <Button className="mt-4 md:mt-5 font-lato py-3 md:py-4 px-3 md:px-4 font-semibold text-[11px] md:text-[12px] [@media(min-width:1750px)]:text-[16px] cursor-pointer bg-[#00A5CF] hover:bg-[#00A5CF] text-[#FFFFFF] leading-[100%] w-full sm:w-auto flex items-center justify-center">
-                CONTACT FOR SUPPORT
-                <span className="rotate-225 ml-2">
-                  <ArrowDown size={20} />
-                </span>
-              </Button>
+                <Button className="mt-4 md:mt-5 font-lato py-3 md:py-4 px-3 md:px-4 font-semibold text-[11px] md:text-[12px] [@media(min-width:1750px)]:text-[16px] cursor-pointer bg-[#00A5CF] hover:bg-[#00A5CF] text-[#FFFFFF] leading-[100%] w-full sm:w-auto flex items-center justify-center">
+                  CONTACT FOR SUPPORT
+                  <span className="rotate-225 ml-2">
+                    <ArrowDown size={20} />
+                  </span>
+                </Button>
               </Link>
             </div>
           </div>
@@ -108,12 +108,12 @@ const ContactUs = () => {
                 to make your experience smooth and enjoyable.
               </p>
               <Link href="form/support-form">
-              <Button className="mt-4 md:mt-5 font-lato py-3 md:py-4 px-3 md:px-4 font-semibold text-[11px] md:text-[12px] [@media(min-width:1750px)]:text-[16px] cursor-pointer bg-[#00A5CF] hover:bg-[#00A5CF] text-[#FFFFFF] leading-[100%] w-full sm:w-auto flex items-center justify-center">
-                CONTACT FOR SUPPORT
-                <span className="rotate-225 ml-2">
-                  <ArrowDown size={20} />
-                </span>
-              </Button>
+                <Button className="mt-4 md:mt-5 font-lato py-3 md:py-4 px-3 md:px-4 font-semibold text-[11px] md:text-[12px] [@media(min-width:1750px)]:text-[16px] cursor-pointer bg-[#00A5CF] hover:bg-[#00A5CF] text-[#FFFFFF] leading-[100%] w-full sm:w-auto flex items-center justify-center">
+                  CONTACT FOR SUPPORT
+                  <span className="rotate-225 ml-2">
+                    <ArrowDown size={20} />
+                  </span>
+                </Button>
               </Link>
             </div>
           </div>
@@ -139,12 +139,12 @@ const ContactUs = () => {
                 to make your experience smooth and enjoyable.
               </p>
               <Link href="form/support-form">
-              <Button className="mt-4 md:mt-5 font-lato py-3 md:py-4 px-3 md:px-4 font-semibold text-[11px] md:text-[12px] [@media(min-width:1750px)]:text-[16px] cursor-pointer bg-[#00A5CF] hover:bg-[#00A5CF] text-[#FFFFFF] leading-[100%] w-full sm:w-auto flex items-center justify-center">
-                CONTACT FOR SUPPORT
-                <span className="rotate-225 ml-2">
-                  <ArrowDown size={20} />
-                </span>
-              </Button>
+                <Button className="mt-4 md:mt-5 font-lato py-3 md:py-4 px-3 md:px-4 font-semibold text-[11px] md:text-[12px] [@media(min-width:1750px)]:text-[16px] cursor-pointer bg-[#00A5CF] hover:bg-[#00A5CF] text-[#FFFFFF] leading-[100%] w-full sm:w-auto flex items-center justify-center">
+                  CONTACT FOR SUPPORT
+                  <span className="rotate-225 ml-2">
+                    <ArrowDown size={20} />
+                  </span>
+                </Button>
               </Link>
             </div>
           </div>
