@@ -1,20 +1,20 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious
-} from "@/components/ui/carousel"
-import VideoCard from './_components/VideoCard'
-// import Autoplay from "embla-carousel-autoplay"
-import { Search } from 'lucide-react'
+} from "@/components/ui/carousel";
+import VideoCard from './_components/VideoCard';
+// import Autoplay from "embla-carousel-autoplay";
+import { Search } from 'lucide-react';
 import axios from 'axios';
 
-import Link from 'next/link'
-import Footer from '@/app/_components/Footer'
+import Link from 'next/link';
+import Footer from '@/app/_components/Footer';
 
 interface FetchedVideo {
   id: number;
@@ -30,7 +30,7 @@ const VideosPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState('HealthTech AI');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12; // 3 rows x 4 columns
+  const itemsPerPage = 12;
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -79,7 +79,7 @@ const VideosPage = () => {
   };
 
   return (
-    <div className="w-full mx-auto mt-30 text-[#003F5C]">
+    <div className="w-full mx-auto mt-30 text-[#003F5C] z-1">
       <div className="lg:w-[85%] flex flex-col md:items-center md:justify-between my-6 gap-4 mx-auto px-[12px]">
         <h2 className="text-[40px] md:text-[50px] font-poppins font-semibold text-center">FlexPick Marketplace</h2>
 
@@ -111,35 +111,32 @@ const VideosPage = () => {
       {/* Tab Navigation */}
       <div className="flex justify-center mt-6">
         <button
-          className={`px-6 py-2 text-[18px] font-semibold ${activeTab === 'HealthTech AI' ? 'text-white bg-[#00A5CF]' : 'text-[#003F5C] bg-gray-200'} rounded-l-lg`}
+          className={`px-6 py-2 text-[18px] font-semibold ${activeTab === 'HealthTech AI' ? 'text-white bg-[#00A5CF]' : 'text-[#003F5C] bg-gray-200'} rounded-l-lg cursor-pointer`}
           onClick={() => setActiveTab('HealthTech AI')}
         >
           HealthTech AI
         </button>
         <button
-          className={`px-6 py-2 text-[18px] font-semibold ${activeTab === 'Emerging Tech' ? 'text-white bg-[#00A5CF]' : 'text-[#003F5C] bg-gray-200'} rounded-r-lg`}
+          className={`px-6 py-2 text-[18px] font-semibold ${activeTab === 'Emerging Tech' ? 'text-white bg-[#00A5CF]' : 'text-[#003F5C] bg-gray-200'} rounded-r-lg cursor-pointer`}
           onClick={() => setActiveTab('Emerging Tech')}
         >
           Emerging Tech
         </button>
       </div>
 
-      {/* <h2 className="text-[40px] w-fit pl-12 mt-12 font-poppins font-semibold bg-gradient-to-r from-[#00A5CF]/30 via-[#00A5CF]/15 to-[#FFFFFF]/5">{activeTab}</h2> */}
-
       <div className="w-full flex justify-center mt-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-12 max-w-7xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-12 max-w-7xl relative z-0">
           {paginatedVideos.length > 0 ? (
-            paginatedVideos.map((video, index) => (
-              <div key={index} className="flex justify-center">
-                <VideoCard
-                  videoId={video.id.toString()}
-                  title={video.title}
-                  thumbnail={video.thumbnail}
-                  tags={video.tags}
-                  description={video.description}
-                  rating={4}
-                />
-              </div>
+            paginatedVideos.map((video) => (
+              <VideoCard
+                key={video.id}
+                videoId={video.id.toString()}
+                title={video.title}
+                thumbnail={video.thumbnail}
+                tags={video.tags}
+                description={video.description}
+                rating={4}
+              />
             ))
           ) : (
             <div className="w-full text-center py-12 col-span-full">
@@ -171,7 +168,7 @@ const VideosPage = () => {
 
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default VideosPage
+export default VideosPage;
